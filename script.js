@@ -33,7 +33,11 @@ function page() {
       nameEl.innerHTML =
         response.data.name + " (" + month + "/" + day + "/" + year + ") ";
         var weatherPic = response.data.weather[0].icon;
-        currentPicEl.setAttribute
+        currentPicEl.setAttribute("src", "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png")
+        currentPicEl.setAttribute("alt", response.data.weather[0].description);
+        currentTempEl.innerHTML = "Temperature: " + k2f(response.data.main.temp) + " &#176f";
+        currentHumidityEl.innerHTML = "Humidity: " + response.data.main.humidity + "%";
+        currentWindEl.innerHTML = "Wind: " + response.data.main.wind + " MPH";
     });
   }
 }
