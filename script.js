@@ -38,6 +38,33 @@ function page() {
         currentTempEl.innerHTML = "Temperature: " + k2f(response.data.main.temp) + " &#176f";
         currentHumidityEl.innerHTML = "Humidity: " + response.data.main.humidity + "%";
         currentWindEl.innerHTML = "Wind: " + response.data.main.wind + " MPH";
+
+        // Get UV Index
+        var lat = response.JSON.cord.lat;
+        var lon = response.JSON.data.lon;
+        var UVQurryURL = " https://api.openweathermap.org/data/2.5/uvi/forcast?lat=" + lat + "&lon" + lon + "&apid" + APIKey + "&cnt=1";
+        axios.get(UVQurryURL)
+        .then(function (response) {
+            var UVIndex = document.createElement("span");
+
+            // when uv is low, green. when moderate, yellow. When high, red. 
+
+            if (response.data[0].value <4 ) {
+                UVIndex.setAttribute("class", "badge badge-sucess");
+            } 
+            else if (response.data[0].value <8) {
+                UVIndex.setAttribute("class", "badge badge-warning");
+            }
+            else {
+                UVIndex.setAttribute("class", "badge badge-danger");
+            }
+            console.log(response.data[0].value)
+            UVIndex.innerHTML = response.data[0].value;
+            currentUvEl.innerHTML = "UV Index: ";
+            currentUvEl.appendChild(UVIndex);
+        });
+
+        
     });
   }
 }
