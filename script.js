@@ -66,7 +66,7 @@ let cityID = response.data.id;
                 let forecastQueryURL = "https://api.openweathermap.org/data/2.5/forecast?id=" + cityID + "&appid=" + APIKey;
                 axios.get(forecastQueryURL)
                     .then(function (response) {
-                        fivedayEl.classList.remove("d-none");
+                        fiveDayEl.classList.remove("d-none");
                         
                         //  Parse response to display forecast for next 5 days
                         const forecastEls = document.querySelectorAll(".forecast");
@@ -99,6 +99,7 @@ let cityID = response.data.id;
 })
 
     })
+    // alert to enter a valid city
     .catch (function(error) {
         if ( error.response) {
             alert("enter a valid city.")
